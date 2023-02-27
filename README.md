@@ -1,2 +1,4 @@
 # TP-1-Qt-Dev-desktop
-## project thaaa les fous pour trouver des fichier sur son pc windows
+
+# Création du project
+tout va se faire sur le server sql lite l'UI sert juste a faire la recherche.
