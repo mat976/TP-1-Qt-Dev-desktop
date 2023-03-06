@@ -1,7 +1,10 @@
 #include "indexer.h"
 
-indexer::indexer(QObject *parent)
-    : QObject{parent}
+indexer::indexer()
 {
+
+}
+
+void indexed::run(){
 
 }

@@ -1,16 +1,12 @@
 #ifndef INDEXER_H
 #define INDEXER_H
 
-#include <QObject>
+#include <QThread>
 
-class indexer : public QObject
+class indexer : public QThread
 {
-    Q_OBJECT
 public:
-    explicit indexer(QObject *parent = nullptr);
-
-signals:
-
+    indexer();
 };
 
 #endif // INDEXER_H
