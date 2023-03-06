@@ -58,6 +58,10 @@ public:
         txtSearch->setObjectName("txtSearch");
         txtSearch->setEnabled(true);
         txtSearch->setMaximumSize(QSize(16777215, 24));
+        txtSearch->setAcceptDrops(true);
+        txtSearch->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        txtSearch->setUndoRedoEnabled(true);
+        txtSearch->setAcceptRichText(true);
 
         verticalLayout->addWidget(txtSearch);
 
@@ -93,7 +97,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 440, 17));
+        menubar->setGeometry(QRect(0, 0, 440, 21));
         menuDespacito = new QMenu(menubar);
         menuDespacito->setObjectName("menuDespacito");
         MainWindow->setMenuBar(menubar);
