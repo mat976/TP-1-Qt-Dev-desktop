@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "indexer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -12,6 +13,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     bool m_isBusy = false;
     int m_proBar = 0;
+    indexer *_indexer = nullptr;
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -24,7 +27,9 @@ public:
 
 private slots:
     void on_btnSearch_clicked();
-
+    void jobStarted();
+    void jobFinished();
+    void newPath(QString v);
 
 private:
     Ui::MainWindow *ui;

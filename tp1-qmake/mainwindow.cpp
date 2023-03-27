@@ -1,5 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <indexer.h>
+#include <QDebug>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , _indexer(new indexer)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    connect(_indexer, &indexer::started, this, &MainWindow::jobStarted);
+    connect(_indexer, &indexer::finished, this, &MainWindow::jobFinished);
+    connect(_indexer, &indexer::newPath, this, &MainWindow::newPath);
+}
 
 bool MainWindow::isBusy() const
 {
@@ -21,13 +34,6 @@ void MainWindow::setProBar(int newProBar)
     m_proBar = newProBar;
 }
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-}
-
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -39,5 +45,21 @@ void MainWindow::on_btnSearch_clicked()
     ui->listResult->setDisabled(m_isBusy);
     m_proBar = m_proBar + 10;
     ui->progressBar->setValue(m_proBar);
+    _indexer->start();
+}
+
+void MainWindow::jobStarted()
+{
+    qDebug() << __FUNCTION__ << __LINE__;
+}
+
+void MainWindow::jobFinished()
+{
+    qDebug() << __FUNCTION__ << __LINE__;
+}
+
+void MainWindow::newPath(QString v)
+{
+    qDebug() << __FUNCTION__ << __LINE__ << v;
 }
 

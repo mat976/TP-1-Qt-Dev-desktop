@@ -1,10 +1,16 @@
 #include "indexer.h"
+#include <QDirIterator>
 
 indexer::indexer()
 {
 
 }
 
-void indexed::run(){
-
+void indexer::run(){
+    QDirIterator it("D:/projects/", QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        QString nextPath = it.next();
+        emit newPath(nextPath);
+        QThread::usleep(100);
+    }
 }
