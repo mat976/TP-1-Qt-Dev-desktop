@@ -60,8 +60,8 @@ void MainWindow::jobFinished()
     qDebug() << __FUNCTION__ << __LINE__;
 }
 
-void MainWindow::newPath(QString path, QString fileName, QString extension, qint64 size)
+void MainWindow::newPath(QString path, QString fileName, QString extension, qint64 size, QString lastModified)
 {
-    qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size;
+    qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size << lastModified;
 }
 

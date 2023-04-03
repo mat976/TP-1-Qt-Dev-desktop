@@ -19,24 +19,16 @@ void indexer::run(){
     while (it.hasNext()) {
         QString nextPath = it.next();
         QRegularExpressionMatch match = re.match(nextPath);
-        QFile file(nextPath);
+        QFileInfo fileInfo(nextPath);
 
         if (match.hasMatch()) {
             QString path = match.captured(1);
             QString fileName = match.captured(2);
             QString extension = match.captured(3);
+            qint64 size = fileInfo.size();
+            QString lastModified = fileInfo.lastModified().toString();
 
-            if (file.open(QIODevice::ReadOnly)) {
-                // Récupère la taille du fichier en octets
-                qint64 size = file.size();
-
-                emit newPath(path, fileName, extension, size);
-
-                // Ferme le fichier
-                file.close();
-            }
-
-
+            emit newPath(path, fileName, extension, size, lastModified);
         }
 
         QThread::usleep(100);
