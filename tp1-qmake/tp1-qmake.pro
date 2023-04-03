@@ -1,5 +1,4 @@
 QT       += core gui
-QT += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,13 +11,11 @@ CONFIG += c++17
 SOURCES += \
     indexer.cpp \
     main.cpp \
-    mainwindow.cpp \
-    searchdb.cpp
+    mainwindow.cpp
 
 HEADERS += \
     indexer.h \
-    mainwindow.h \
-    searchdb.h
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui
