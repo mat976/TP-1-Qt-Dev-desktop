@@ -25,7 +25,8 @@ bool SearchDB::createTable()
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             "path TEXT,"
             "filename TEXT,"
-            "size INTEGER"
+            "size INTEGER,"
+            "lastModified TEXT,"
             ")";
     if (!query.exec(queryString)) {
         qDebug() << "Error: table creation" << query.lastError().text();
@@ -34,12 +35,13 @@ bool SearchDB::createTable()
     return true;
 }
 
-bool SearchDB::insertFile(QString path, QString filename, qint64 fileSize)
+bool SearchDB::insertFile(QString path, QString filename, qint64 fileSize, QString lastModified)
 {
-    QString queryStr = QString("INSERT INTO files (path, filename, size) VALUES('%1', '%2', %3)")
+    QString queryStr = QString("INSERT INTO files (path, filename, size, lastModified) VALUES('%1', '%2', %3, '%4')")
             .arg(path)
             .arg(filename)
-            .arg(fileSize);
+            .arg(fileSize)
+            .arg(lastModified);
 
     QSqlQuery query;
     if (query.exec(queryStr)) {

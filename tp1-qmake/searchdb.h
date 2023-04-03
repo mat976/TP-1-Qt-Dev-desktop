@@ -14,7 +14,7 @@ public:
     explicit SearchDB(QObject *parent = nullptr);
     bool openDB(QString dbName);
     bool createTable();
-    bool insertFile(QString path, QString filename, qint64 fileSize);
+    bool insertFile(QString path, QString filename, qint64 fileSize, QString lastModified);
 
 private:
     QSqlDatabase m_db;
