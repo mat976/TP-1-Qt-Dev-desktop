@@ -28,6 +28,18 @@
           <height>24</height>
          </size>
         </property>
+        <property name="acceptDrops">
+         <bool>true</bool>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="undoRedoEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="acceptRichText">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
