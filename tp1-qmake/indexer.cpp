@@ -41,4 +41,6 @@ void indexer::run(){
 
         QThread::usleep(100);
     }
+
 }
+

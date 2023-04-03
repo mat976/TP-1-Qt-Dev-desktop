@@ -16,6 +16,7 @@ public:
     bool insertFile(QString path, QString filename, qint64 size, QString filetype, QString lastModified);
     bool searchFiles(QString keyword, QString path, QString ext, QString type, QString dateFrom, QString dateTo, QString sortBy, QString sortOrder);
     void closeDB();
+    void test();
 
 private:
     QSqlDatabase m_db;

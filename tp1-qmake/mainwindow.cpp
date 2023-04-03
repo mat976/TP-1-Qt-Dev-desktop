@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <indexer.h>
+#include <searchdb.h>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _indexer(new indexer)
+    , _searchdb(new SearchDB)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -46,8 +48,8 @@ void MainWindow::on_btnSearch_clicked()
     m_proBar = m_proBar + 10;
     ui->progressBar->setValue(m_proBar);
 
-    _indexer->setStart_path("C:/");
-    _indexer->start();
+    //_indexer->setStart_path("C:/");
+    //_indexer->start();
 }
 
 void MainWindow::jobStarted()

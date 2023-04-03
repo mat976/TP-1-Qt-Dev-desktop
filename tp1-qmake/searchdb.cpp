@@ -97,3 +97,41 @@ void SearchDB::closeDB()
 {
     m_db.close();
 }
+
+
+void SearchDB::test(){
+    // Créer une instance de la classe SearchDB
+    SearchDB searchDB;
+
+    // Ouvrir la base de données
+    searchDB.openDB();
+
+    // Insérer un fichier dans la base de données
+    QString path = "/chemin/vers/mon/fichier.txt";
+    QString filename = "fichier.txt";
+    qint64 size = 1024;
+    QString filetype = "txt";
+    QDateTime lastModified = QDateTime::currentDateTime();
+    QString lastModifiedStr = lastModified.toString("yyyy-MM-dd hh:mm:ss");
+    searchDB.insertFile(path, filename, size, filetype, lastModifiedStr);
+
+    // Rechercher le fichier dans la base de données
+    QString keyword = "fichier";
+    QString ext = "txt";
+    QString type = "";
+    QString dateFrom = "";
+    QString dateTo = "";
+    QString sortBy = "filename";
+    QString sortOrder = "ASC";
+    bool result = searchDB.searchFiles(keyword, "", ext, type, dateFrom, dateTo, sortBy, sortOrder);
+
+    if (result) {
+        qDebug() << "Le fichier a été trouvé dans la base de données.";
+    } else {
+        qDebug() << "Le fichier n'a pas été trouvé dans la base de données.";
+    }
+
+    // Fermer la base de données
+    searchDB.closeDB();
+
+}
