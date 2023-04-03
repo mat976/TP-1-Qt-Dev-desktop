@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "indexer.h"
+#include "searchdb.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +15,7 @@ class MainWindow : public QMainWindow
     bool m_isBusy = false;
     int m_proBar = 0;
     indexer *_indexer = nullptr;
+    SearchDB searchDb;
 
 public:
     MainWindow(QWidget *parent = nullptr);

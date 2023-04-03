@@ -7,7 +7,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _indexer(new indexer)
-    , _searchdb(new SearchDB)
+    , searchDb(new SearchDB)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -50,6 +50,8 @@ void MainWindow::on_btnSearch_clicked()
 
     //_indexer->setStart_path("C:/");
     //_indexer->start();
+
+    searchDb.test();
 }
 
 void MainWindow::jobStarted()
