@@ -45,6 +45,8 @@ void MainWindow::on_btnSearch_clicked()
     ui->listResult->setDisabled(m_isBusy);
     m_proBar = m_proBar + 10;
     ui->progressBar->setValue(m_proBar);
+
+    _indexer->setStart_path("C:/");
     _indexer->start();
 }
 
@@ -58,8 +60,8 @@ void MainWindow::jobFinished()
     qDebug() << __FUNCTION__ << __LINE__;
 }
 
-void MainWindow::newPath(QString v)
+void MainWindow::newPath(QString path, QString fileName, QString extension, qint64 size)
 {
-    qDebug() << __FUNCTION__ << __LINE__ << v;
+    qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size;
 }
 

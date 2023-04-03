@@ -29,7 +29,7 @@ private slots:
     void on_btnSearch_clicked();
     void jobStarted();
     void jobFinished();
-    void newPath(QString v);
+    void newPath(QString path, QString fileName, QString extension, qint64 size);
 
 private:
     Ui::MainWindow *ui;
