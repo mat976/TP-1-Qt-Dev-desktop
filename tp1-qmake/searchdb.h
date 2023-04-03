@@ -5,16 +5,17 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QFileInfo>
 
 class SearchDB : public QObject
 {
     Q_OBJECT
 public:
     explicit SearchDB(QObject *parent = nullptr);
-    bool openDB(QString dbName);
-    bool createTable();
-    bool insertFile(QString path, QString filename, qint64 fileSize);
+    bool openDB();
+    bool createDB();
+    bool insertFile(QString path, QString filename, qint64 size, QString filetype, QString lastModified);
+    bool searchFiles(QString keyword, QString path, QString ext, QString type, QString dateFrom, QString dateTo, QString sortBy, QString sortOrder);
+    void closeDB();
 
 private:
     QSqlDatabase m_db;
