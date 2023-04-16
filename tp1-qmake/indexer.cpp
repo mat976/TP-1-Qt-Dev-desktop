@@ -1,6 +1,7 @@
 #include "indexer.h"
 #include <QDirIterator>
 #include <QRegularExpression>
+#include <bdd.h>
 
 indexer::indexer()
 {
@@ -30,6 +31,13 @@ void indexer::run(){
                 // Récupère la taille du fichier en octets
                 qint64 size = file.size();
 
+                // Ajoute les informations du fichier à la base de données
+                BDD bdd;
+                bdd.open();
+                bdd.insertData(path, fileName, extension, size);
+                bdd.close();
+
+                // Émet le signal newPath
                 emit newPath(path, fileName, extension, size);
 
                 // Ferme le fichier
@@ -43,4 +51,5 @@ void indexer::run(){
     }
 
 }
+
 

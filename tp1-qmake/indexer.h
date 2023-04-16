@@ -14,6 +14,8 @@ class indexer : public QThread {
 
     signals:
         void newPath(QString path, QString filename, QString extension, qint64 size);
+        void newFileData(QString path, QString fileName, QString extension, qint64 size);
+
 };
 
 #endif // INDEXER_H

@@ -29,13 +29,17 @@ query.exec("CREATE TABLE IF NOT EXISTS files ("
 "size INTEGER)");
 }
 
-void BDD::insertData(QString path, QString filename, QString extension, qint64 size) {
-QSqlQuery query;
-query.prepare("INSERT INTO files (path, filename, extension, size) "
-"VALUES (:path, :filename, :extension, :size)");
-query.bindValue(":path", path);
-query.bindValue(":filename", filename);
-query.bindValue(":extension", extension);
-query.bindValue(":size", size);
-query.exec();
+void BDD::insertData(QString path, QString fileName, QString extension, qint64 size)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO files (path, fileName, extension, size) VALUES (:path, :fileName, :extension, :size)");
+    query.bindValue(":path", path);
+    query.bindValue(":fileName", fileName);
+    query.bindValue(":extension", extension);
+    query.bindValue(":size", size);
+
+    if (!query.exec()) {
+        qDebug() << "Error inserting data into database: " << query.lastError().text();
+    }
 }
+

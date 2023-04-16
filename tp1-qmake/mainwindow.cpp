@@ -43,6 +43,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_btnSearch_clicked()
 {
+
     BDD bdd;
     bdd.open();
     bdd.createTable();
@@ -57,6 +58,7 @@ void MainWindow::on_btnSearch_clicked()
 
     _indexer->setStart_path("C:/");
     _indexer->start();
+    connect(_indexer, &indexer::newPath, &bdd, &BDD::insertData);
 
 }
 

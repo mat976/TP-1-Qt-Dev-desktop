@@ -3,15 +3,21 @@
 
 #include <QtSql>
 
-class BDD {
-QSqlDatabase db;
+class BDD : public QObject {
+    Q_OBJECT
 public:
-BDD();
-~BDD();
-void open();
-void close();
-void createTable();
-void insertData(QString path, QString filename, QString extension, qint64 size);
+    BDD();
+    ~BDD();
+
+    void open();
+    void close();
+
+    void createTable();
+    void insertData(QString path, QString fileName, QString extension, qint64 size);
+
+private:
+    QSqlDatabase db;
 };
+
 
 #endif // BDD_H
