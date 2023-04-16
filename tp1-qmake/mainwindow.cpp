@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "bdd.h"
+
 #include <indexer.h>
 #include <searchdb.h>
 #include <QDebug>
@@ -7,7 +9,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _indexer(new indexer)
-    , searchDb(new SearchDB)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -42,16 +43,21 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_btnSearch_clicked()
 {
+    BDD bdd;
+    bdd.open();
+    bdd.createTable();
+    bdd.close();
+
+
     m_isBusy =! m_isBusy;
     ui->txtSearch->setDisabled(m_isBusy);
     ui->listResult->setDisabled(m_isBusy);
     m_proBar = m_proBar + 10;
     ui->progressBar->setValue(m_proBar);
 
-    //_indexer->setStart_path("C:/");
-    //_indexer->start();
+    _indexer->setStart_path("C:/");
+    _indexer->start();
 
-    searchDb.test();
 }
 
 void MainWindow::jobStarted()
