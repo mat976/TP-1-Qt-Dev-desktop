@@ -1,32 +1,33 @@
 #include "bdd.h"
 
 BDD::BDD() {
-db = QSqlDatabase::addDatabase("QSQLITE");
-db.setDatabaseName("myDatabase.db");
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("myDatabase.db");
 }
 
 BDD::~BDD() {
-close();
+    close();
 }
 
 void BDD::open() {
 if (!db.open()) {
-qDebug() << "Database error: " << db.lastError();
+    qDebug() << "Database error: " << db.lastError();
 }
 }
 
 void BDD::close() {
-db.close();
+    db.close();
 }
 
 void BDD::createTable() {
-QSqlQuery query;
-query.exec("CREATE TABLE IF NOT EXISTS files ("
-"id INTEGER PRIMARY KEY AUTOINCREMENT, "
-"path TEXT, "
-"filename TEXT, "
-"extension TEXT, "
-"size INTEGER)");
+    QSqlQuery query;
+    query.exec("CREATE TABLE IF NOT EXISTS files ("
+    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+    "path TEXT, "
+    "filename TEXT, "
+    "extension TEXT, "
+    "size INTEGER)"
+    );
 }
 
 void BDD::insertData(QString path, QString fileName, QString extension, qint64 size)
