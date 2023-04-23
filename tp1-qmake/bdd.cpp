@@ -1,9 +1,14 @@
 #include "bdd.h"
 
 BDD::BDD() {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("myDatabase.db");
+    if (!QSqlDatabase::contains("qt_sql_default_connection")) {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("myDatabase.db");
+    } else {
+        db = QSqlDatabase::database("qt_sql_default_connection");
+    }
 }
+
 
 BDD::~BDD() {
     close();

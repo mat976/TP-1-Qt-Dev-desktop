@@ -37,4 +37,5 @@ private:
     Ui::MainWindow *ui;
     QBuffer _buffer;
 };
+
 #endif // MAINWINDOW_H
