@@ -9,11 +9,11 @@ public:
     BDD();
     ~BDD();
 
-    void open();
+    bool open();
     void close();
 
     void createTable();
-    void insertData(const QList<QList<QVariant>>& data);
+    void insertData(QList<QVariantList> data);
     QList<QList<QVariant>> searchData(const QString& searchString);
 
 

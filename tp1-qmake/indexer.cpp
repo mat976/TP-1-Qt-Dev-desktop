@@ -18,13 +18,9 @@ void indexer::run(){
     QRegularExpression re("^(.*)/([^/]+)\\.([^.]+)$");
 
     BDD bdd;
-    bdd.open();
-
-    // Crée la table si elle n'existe pas
-    bdd.createTable();
 
     QList<QVariantList> buffer;
-    const int bufferSize = 500;
+    const int bufferSize = 400;
 
     while (it.hasNext()) {
         QString nextPath = it.next();
@@ -72,8 +68,6 @@ void indexer::run(){
     if (!buffer.isEmpty()) {
         bdd.insertData(buffer);
     }
-
-    bdd.close();
 }
 
 

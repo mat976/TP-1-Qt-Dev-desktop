@@ -14,11 +14,20 @@ BDD::~BDD() {
     close();
 }
 
-void BDD::open() {
-if (!db.open()) {
-    qDebug() << "Database error: " << db.lastError();
+bool BDD::open() {
+    // Connexion à la base de données
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("myDatabase.db");
+
+    // Ouvre la base de données
+    if (!db.open()) {
+        qDebug() << "Error: connection with database failed";
+        return false;
+    }
+
+    return true;
 }
-}
+
 
 void BDD::close() {
     db.close();
@@ -60,35 +69,34 @@ QList<QList<QVariant>> BDD::searchData(const QString& searchString)
 }
 
 
-void BDD::insertData(const QList<QList<QVariant>>& data)
+void BDD::insertData(QList<QVariantList> data)
 {
-    QSqlQuery query(db);
-
-    if (!db.transaction()) {
-        qDebug() << "Transaction error: " << db.lastError().text();
-        return;
+    if (!db.isOpen()) {
+        if (!open()) {
+            qWarning() << "Cannot open database:" << db.lastError().text();
+            return;
+        }
+        createTable();
     }
 
-    query.prepare("INSERT INTO files (path, fileName, extension, size) VALUES (:path, :fileName, :extension, :size)");
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO files (path, filename, extension, size) VALUES (:path, :filename, :extension, :size)");
 
-    for (const auto& row : data) {
-        query.bindValue(":path", row[0]);
-        query.bindValue(":fileName", row[1]);
-        query.bindValue(":extension", row[2]);
-        query.bindValue(":size", row[3]);
+    for (const auto& rowData : data) {
+        query.bindValue(":path", rowData.at(0).toString());
+        query.bindValue(":filename", rowData.at(1).toString());
+        query.bindValue(":extension", rowData.at(2).toString());
+        query.bindValue(":size", rowData.at(3).toLongLong());
 
         if (!query.exec()) {
-            qDebug() << "Error inserting data into database: " << query.lastError().text();
-            db.rollback();
-            return;
+            qWarning() << "Failed to insert data:" << query.lastError().text();
         }
     }
 
-    if (!db.commit()) {
-        qDebug() << "Commit error: " << db.lastError().text();
-        db.rollback();
-    }
+    db.close();
 }
+
+
 
 
 
