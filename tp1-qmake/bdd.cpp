@@ -35,19 +35,35 @@ void BDD::createTable() {
     );
 }
 
-void BDD::insertData(const QList<QList<QVariant>>& data) {
-    QSqlQuery query;
-    query.prepare("INSERT INTO files (path, fileName, extension, size) VALUES (?, ?, ?, ?)");
+void BDD::insertData(const QList<QList<QVariant>>& data)
+{
+    QSqlQuery query(db);
 
-    for (const auto& record : data) {
-        query.addBindValue(record[0]);
-        query.addBindValue(record[1]);
-        query.addBindValue(record[2]);
-        query.addBindValue(record[3]);
+    if (!db.transaction()) {
+        qDebug() << "Transaction error: " << db.lastError().text();
+        return;
+    }
+
+    query.prepare("INSERT INTO files (path, fileName, extension, size) VALUES (:path, :fileName, :extension, :size)");
+
+    for (const auto& row : data) {
+        query.bindValue(":path", row[0]);
+        query.bindValue(":fileName", row[1]);
+        query.bindValue(":extension", row[2]);
+        query.bindValue(":size", row[3]);
+
         if (!query.exec()) {
             qDebug() << "Error inserting data into database: " << query.lastError().text();
+            db.rollback();
+            return;
         }
     }
+
+    if (!db.commit()) {
+        qDebug() << "Commit error: " << db.lastError().text();
+        db.rollback();
+    }
 }
+
 
 

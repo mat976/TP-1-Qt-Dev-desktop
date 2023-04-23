@@ -24,7 +24,7 @@ void indexer::run(){
     bdd.createTable();
 
     QList<QVariantList> buffer;
-    const int bufferSize = 100;
+    const int bufferSize = 500;
 
     while (it.hasNext()) {
         QString nextPath = it.next();
