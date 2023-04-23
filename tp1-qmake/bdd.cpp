@@ -35,17 +35,19 @@ void BDD::createTable() {
     );
 }
 
-void BDD::insertData(QString path, QString fileName, QString extension, qint64 size)
-{
+void BDD::insertData(const QList<QList<QVariant>>& data) {
     QSqlQuery query;
-    query.prepare("INSERT INTO files (path, fileName, extension, size) VALUES (:path, :fileName, :extension, :size)");
-    query.bindValue(":path", path);
-    query.bindValue(":fileName", fileName);
-    query.bindValue(":extension", extension);
-    query.bindValue(":size", size);
+    query.prepare("INSERT INTO files (path, fileName, extension, size) VALUES (?, ?, ?, ?)");
 
-    if (!query.exec()) {
-        qDebug() << "Error inserting data into database: " << query.lastError().text();
+    for (const auto& record : data) {
+        query.addBindValue(record[0]);
+        query.addBindValue(record[1]);
+        query.addBindValue(record[2]);
+        query.addBindValue(record[3]);
+        if (!query.exec()) {
+            qDebug() << "Error inserting data into database: " << query.lastError().text();
+        }
     }
 }
+
 

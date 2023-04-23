@@ -17,6 +17,15 @@ void indexer::run(){
     QDirIterator it(m_start_path, QDirIterator::Subdirectories);
     QRegularExpression re("^(.*)/([^/]+)\\.([^.]+)$");
 
+    BDD bdd;
+    bdd.open();
+
+    // Crée la table si elle n'existe pas
+    bdd.createTable();
+
+    QList<QVariantList> buffer;
+    const int bufferSize = 100;
+
     while (it.hasNext()) {
         QString nextPath = it.next();
         QRegularExpressionMatch match = re.match(nextPath);
@@ -33,14 +42,13 @@ void indexer::run(){
                     // Récupère la taille du fichier en octets
                     qint64 size = file.size();
 
-                    // Ajoute les informations du fichier à la base de données
-                    BDD bdd;
-                    bdd.open();
-                    bdd.insertData(path, fileName, extension, size);
-                    bdd.close();
-
-                    // Émet le signal newPath
-                    emit newPath(path, fileName, extension, size);
+                    // Ajoute les informations du fichier au buffer
+                    QVariantList rowData;
+                    rowData.append(path);
+                    rowData.append(fileName);
+                    rowData.append(extension);
+                    rowData.append(size);
+                    buffer.append(rowData);
 
                     // Ferme le fichier
                     file.close();
@@ -48,8 +56,24 @@ void indexer::run(){
             }
         }
 
+        // Vérifie si le buffer est plein
+        if (buffer.size() == bufferSize) {
+            // Insère les données du buffer dans la base de données
+            bdd.insertData(buffer);
+
+            // Vide le buffer
+            buffer.clear();
+        }
+
         QThread::usleep(100);
     }
+
+    // Insère les données restantes du buffer dans la base de données
+    if (!buffer.isEmpty()) {
+        bdd.insertData(buffer);
+    }
+
+    bdd.close();
 }
 
 

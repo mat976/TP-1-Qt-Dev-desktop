@@ -11,22 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(_indexer, &indexer::started, this, &MainWindow::jobStarted);
-    connect(_indexer, &indexer::finished, this, &MainWindow::jobFinished);
-    connect(_indexer, &indexer::newPath, this, &MainWindow::newPath);
-
-    BDD bdd;
-    bdd.open();
-    bdd.createTable();
-    // debut d'indexer pour récuperer les données
     _indexer->setStart_path("C:/");
     _indexer->start();
-    // debut d'indexer pour récuperer les données
-    // envoie des données dans la bdd
-    connect(_indexer, &indexer::newPath, &bdd, &BDD::insertData);
-    // envoie des données dans la bdd
-
-    bdd.close();
 }
 
 bool MainWindow::isBusy() const

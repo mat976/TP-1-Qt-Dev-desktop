@@ -13,7 +13,7 @@ public:
     void close();
 
     void createTable();
-    void insertData(QString path, QString fileName, QString extension, qint64 size);
+    void insertData(const QList<QList<QVariant>>& data);
 
 private:
     QSqlDatabase db;
