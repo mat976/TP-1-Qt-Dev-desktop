@@ -27,29 +27,30 @@ void indexer::run(){
             QString fileName = match.captured(2);
             QString extension = match.captured(3);
 
-            if (file.open(QIODevice::ReadOnly)) {
-                // Récupère la taille du fichier en octets
-                qint64 size = file.size();
+            // Vérifie si l'extension du fichier est différente de "dll"
+            if (extension.toLower() != "dll") {
+                if (file.open(QIODevice::ReadOnly)) {
+                    // Récupère la taille du fichier en octets
+                    qint64 size = file.size();
 
-                // Ajoute les informations du fichier à la base de données
-                BDD bdd;
-                bdd.open();
-                bdd.insertData(path, fileName, extension, size);
-                bdd.close();
+                    // Ajoute les informations du fichier à la base de données
+                    BDD bdd;
+                    bdd.open();
+                    bdd.insertData(path, fileName, extension, size);
+                    bdd.close();
 
-                // Émet le signal newPath
-                emit newPath(path, fileName, extension, size);
+                    // Émet le signal newPath
+                    emit newPath(path, fileName, extension, size);
 
-                // Ferme le fichier
-                file.close();
+                    // Ferme le fichier
+                    file.close();
+                }
             }
-
-
         }
 
         QThread::usleep(100);
     }
-
 }
+
 
 
