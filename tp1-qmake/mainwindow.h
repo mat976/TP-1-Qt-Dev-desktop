@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QtCore>
 #include <QMainWindow>
 #include "indexer.h"
 
@@ -16,8 +17,9 @@ class MainWindow : public QMainWindow
     indexer *_indexer = nullptr;
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 
     bool isBusy() const;
     void setIsBusy(bool newIsBusy);
@@ -33,5 +35,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QBuffer _buffer;
 };
 #endif // MAINWINDOW_H

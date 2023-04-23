@@ -3,7 +3,6 @@
 #include "bdd.h"
 
 #include <indexer.h>
-#include <searchdb.h>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,6 +14,19 @@ MainWindow::MainWindow(QWidget *parent)
     connect(_indexer, &indexer::started, this, &MainWindow::jobStarted);
     connect(_indexer, &indexer::finished, this, &MainWindow::jobFinished);
     connect(_indexer, &indexer::newPath, this, &MainWindow::newPath);
+
+    BDD bdd;
+    bdd.open();
+    bdd.createTable();
+    // debut d'indexer pour récuperer les données
+    _indexer->setStart_path("C:/");
+    _indexer->start();
+    // debut d'indexer pour récuperer les données
+    // envoie des données dans la bdd
+    connect(_indexer, &indexer::newPath, &bdd, &BDD::insertData);
+    // envoie des données dans la bdd
+
+    bdd.close();
 }
 
 bool MainWindow::isBusy() const
@@ -44,9 +56,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnSearch_clicked()
 {
 
-    BDD bdd;
-    bdd.open();
-    bdd.createTable();
 
 
 
@@ -56,11 +65,6 @@ void MainWindow::on_btnSearch_clicked()
     m_proBar = m_proBar + 10;
     ui->progressBar->setValue(m_proBar);
 
-    _indexer->setStart_path("C:/");
-    _indexer->start();
-    connect(_indexer, &indexer::newPath, &bdd, &BDD::insertData);
-
-    bdd.close();
 
 }
 
