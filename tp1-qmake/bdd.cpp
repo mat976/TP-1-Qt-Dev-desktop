@@ -34,6 +34,31 @@ void BDD::createTable() {
     "size INTEGER)"
     );
 }
+QList<QList<QVariant>> BDD::searchData(const QString& searchString)
+{
+    QList<QList<QVariant>> result;
+
+    QSqlQuery query(db);
+    query.prepare("SELECT path, filename, extension, size FROM files WHERE path LIKE :search OR filename LIKE :search OR extension LIKE :search");
+    query.bindValue(":search", "%" + searchString + "%");
+
+    if (!query.exec()) {
+        qDebug() << "Error executing search query: " << query.lastError().text();
+        return result;
+    }
+
+    while (query.next()) {
+        QList<QVariant> row;
+        row.append(query.value("path"));
+        row.append(query.value("filename"));
+        row.append(query.value("extension"));
+        row.append(query.value("size"));
+        result.append(row);
+    }
+
+    return result;
+}
+
 
 void BDD::insertData(const QList<QList<QVariant>>& data)
 {

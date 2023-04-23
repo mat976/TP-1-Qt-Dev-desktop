@@ -14,6 +14,8 @@ public:
 
     void createTable();
     void insertData(const QList<QList<QVariant>>& data);
+    QList<QList<QVariant>> searchData(const QString& searchString);
+
 
 private:
     QSqlDatabase db;

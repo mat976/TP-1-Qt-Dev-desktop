@@ -3,6 +3,7 @@
 
 #include <QtCore>
 #include <QMainWindow>
+#include "bdd.h"
 #include "indexer.h"
 
 QT_BEGIN_NAMESPACE
@@ -20,10 +21,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
-    bool isBusy() const;
-    void setIsBusy(bool newIsBusy);
-
     int proBar() const;
     void setProBar(int newProBar);
 
@@ -36,6 +33,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QBuffer _buffer;
+
+    BDD _bdd; // declare an instance of the BDD class
+
 };
 
 #endif // MAINWINDOW_H

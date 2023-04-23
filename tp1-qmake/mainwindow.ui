@@ -43,7 +43,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QListView" name="listResult"/>
+       <widget class="QTableView" name="tableView"/>
       </item>
       <item>
        <widget class="QProgressBar" name="progressBar">

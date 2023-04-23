@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "bdd.h"
-
-#include <indexer.h>
+#include <QStandardItemModel>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -13,16 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     _indexer->setStart_path("C:/");
     _indexer->start();
-}
-
-bool MainWindow::isBusy() const
-{
-    return m_isBusy;
-}
-
-void MainWindow::setIsBusy(bool newIsBusy)
-{
-    m_isBusy = newIsBusy;
 }
 
 int MainWindow::proBar() const
@@ -41,18 +30,31 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_btnSearch_clicked()
 {
+    QString searchString = ui->txtSearch->toPlainText();
+    _bdd.open();
+    // Recherche des données correspondantes dans la base de données
+    QList<QList<QVariant>> searchDataList = _bdd.searchData(searchString);
 
+    // Création d'un modèle de données pour la vue
+    QStandardItemModel *model = new QStandardItemModel(searchDataList.size(), 4, this);
+    model->setHeaderData(0, Qt::Horizontal, "Path");
+    model->setHeaderData(1, Qt::Horizontal, "File Name");
+    model->setHeaderData(2, Qt::Horizontal, "Extension");
+    model->setHeaderData(3, Qt::Horizontal, "Size");
 
+    // Remplissage du modèle avec les données de la base de données
+    for (int row = 0; row < searchDataList.size(); ++row) {
+        for (int col = 0; col < searchDataList[row].size(); ++col) {
+            QStandardItem *item = new QStandardItem(searchDataList[row][col].toString());
+            model->setItem(row, col, item);
+        }
+    }
 
-
-    m_isBusy =! m_isBusy;
-    ui->txtSearch->setDisabled(m_isBusy);
-    ui->listResult->setDisabled(m_isBusy);
-    m_proBar = m_proBar + 10;
-    ui->progressBar->setValue(m_proBar);
-
-
+    // Affichage du modèle dans la vue
+    ui->tableView->setModel(model);
+    _bdd.close();
 }
+
 
 void MainWindow::jobStarted()
 {
