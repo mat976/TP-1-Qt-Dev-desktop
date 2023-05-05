@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     _indexer->setStart_path("C:/");
     _indexer->start();
 }
@@ -32,17 +33,17 @@ void MainWindow::on_btnSearch_clicked()
 {
     QString searchString = ui->txtSearch->toPlainText();
     _bdd.open();
-    // Recherche des données correspondantes dans la base de données
+    // Recherche des données correspondantes dans la base de donnees
     QList<QList<QVariant>> searchDataList = _bdd.searchData(searchString);
 
-    // Création d'un modèle de données pour la vue
+    // Création d'un modele de données pour la vue
     QStandardItemModel *model = new QStandardItemModel(searchDataList.size(), 4, this);
     model->setHeaderData(0, Qt::Horizontal, "Path");
     model->setHeaderData(1, Qt::Horizontal, "File Name");
     model->setHeaderData(2, Qt::Horizontal, "Extension");
     model->setHeaderData(3, Qt::Horizontal, "Size");
 
-    // Remplissage du modèle avec les données de la base de données
+    // Remplissage du modele avec les données de la base de données
     for (int row = 0; row < searchDataList.size(); ++row) {
         for (int col = 0; col < searchDataList[row].size(); ++col) {
             QStandardItem *item = new QStandardItem(searchDataList[row][col].toString());

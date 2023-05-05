@@ -54,6 +54,7 @@ void indexer::run(){
 
         // Vérifie si le buffer est plein
         if (buffer.size() == bufferSize) {
+            qDebug() << "Buffer full, inserting data into database...";
             // Insère les données du buffer dans la base de données
             bdd.insertData(buffer);
 
@@ -66,9 +67,8 @@ void indexer::run(){
 
     // Insère les données restantes du buffer dans la base de données
     if (!buffer.isEmpty()) {
+        qDebug() << "Inserting remaining data into database...";
         bdd.insertData(buffer);
     }
+    qDebug() << "Indexing complete";
 }
-
-
-
