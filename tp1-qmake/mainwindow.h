@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "indexer.h"
+#include "lexer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +15,8 @@ class MainWindow : public QMainWindow
     bool m_isBusy = false;
     int m_proBar = 0;
     indexer *_indexer = nullptr;
+    Lexer _lexer;
+    QString testQuery = "SEARCH 'testme please' CREATED:31/12/2020 MAX_SIZE:10M MIN_SIZE:1M SIZE:BETWEEN 10M AND 20M EXT:txt,doc,xlsx TYPE:image OR text";
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -30,6 +33,8 @@ private slots:
     void jobStarted();
     void jobFinished();
     void newPath(QString path, QString fileName, QString extension, qint64 size, QString lastModified);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

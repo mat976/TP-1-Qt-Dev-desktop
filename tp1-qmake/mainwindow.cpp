@@ -6,6 +6,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _indexer(new indexer)
+    , _lexer()
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -63,5 +64,20 @@ void MainWindow::jobFinished()
 void MainWindow::newPath(QString path, QString fileName, QString extension, qint64 size, QString lastModified)
 {
     qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size << lastModified;
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    _lexer.setQuery(this->testQuery);
+    _lexer.checkSearchToken();
+    _lexer.checkLastModifiedToken();
+    _lexer.checkCreatedToken();
+    _lexer.checkMaxSizeToken();
+    _lexer.checkMinSizeToken();
+    _lexer.checkSizeToken();
+    _lexer.checkExtToken();
+    _lexer.checkTypeToken();
+
 }
 
