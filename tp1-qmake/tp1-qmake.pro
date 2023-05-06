@@ -1,7 +1,7 @@
 QT += core gui
 QT += sql
 QT += core
-
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,13 +14,17 @@ CONFIG += c++17
 SOURCES += \
     bdd.cpp \
     indexer.cpp \
+    indexingclient.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    server.cpp
 
 HEADERS += \
     bdd.h \
     indexer.h \
-    mainwindow.h
+    indexingclient.h \
+    mainwindow.h \
+    server.h
 
 FORMS += \
     mainwindow.ui

@@ -95,7 +95,6 @@ for (const auto& rowData : data) {
         qWarning() << "Failed to insert data:" << query.lastError().text();
     }
 }
-    QThread::usleep(500);
     db.close();
 
     qDebug() << "Data inserted into database";
