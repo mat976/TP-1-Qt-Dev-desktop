@@ -15,7 +15,6 @@ class MainWindow : public QMainWindow
     bool m_isBusy = false;
     int m_proBar = 0;
     indexer *_indexer = nullptr;
-    Lexer _lexer;
     QString testQuery = "SEARCH 'testme please' CREATED:31/12/2020 MAX_SIZE:10M MIN_SIZE:1M SIZE:BETWEEN 10M AND 20M EXT:txt,doc,xlsx TYPE:image OR text";
 
 public:
