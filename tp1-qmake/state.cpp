@@ -1,8 +1,12 @@
 #include "state.h"
 
-State::State()
+State::State(const QString& stateName, const int id)
 {
+    this->_stateName = stateName;
+    this->_id = id;
 
+    qDebug() << _stateName;
+    qDebug() << _id;
 }
 
 QString State::stateName() const
@@ -14,12 +18,8 @@ int State::id() const {
     return this->_id;
 }
 
-void State::setStateName(const QString &newStateName)
+void State::addTransition(Transition *transition)
 {
-    this->_stateName = newStateName;
+    _transitions.append(transition);
 }
 
-void State::setId(const int newId)
-{
-    this->_id = newId;
-}

@@ -6,6 +6,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _indexer(new indexer)
+    , _fsm()
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -68,7 +69,7 @@ void MainWindow::newPath(QString path, QString fileName, QString extension, qint
 
 void MainWindow::on_pushButton_clicked()
 {
-
-
+    this->_fsm.setQuery(this->testQuery);
+    this->_fsm.run();
 }
 

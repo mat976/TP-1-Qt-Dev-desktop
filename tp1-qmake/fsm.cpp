@@ -1,8 +1,12 @@
 #include "fsm.h"
 
-Fsm::Fsm()
+Fsm::Fsm() : _currentState("UNKNOWN", 0)
 {
-    this->_lexer.setQuery(this->m_query);
+
+}
+
+void Fsm::setQuery(const QString& query){
+    this->_lexer.setQuery(query);
 }
 
 void Fsm::run()

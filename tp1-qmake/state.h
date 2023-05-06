@@ -4,18 +4,20 @@
 #include "QString"
 #include "qdebug.h"
 
+class Transition;
+
 class State
 {
     QString _stateName;
     int _id = 0;
     static int currentIndex;
+    QVector<Transition*> _transitions;
 
     public:
-        State();
+        State(const QString& stateName, const int id);
         QString stateName() const;
         int id() const;
-        void setStateName(const QString &newStateName);
-        void setId(const int newId);
+        void addTransition(Transition* transition);
 
         bool operator == (const State& st1) {
             qDebug() << __FUNCTION__ << st1.id() << id();

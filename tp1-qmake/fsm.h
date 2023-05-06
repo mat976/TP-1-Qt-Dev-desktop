@@ -9,12 +9,12 @@ class Fsm
 {
     State _currentState;
     Lexer _lexer;
-    QString m_query;
+    bool checkState(State& src, const State& target, bool cond);
 
     public:
         Fsm();
         void run();
-        bool checkState(State& src, const State& target, bool cond);
+        void setQuery(const QString& query);
 };
 
 #endif // FSM_H
