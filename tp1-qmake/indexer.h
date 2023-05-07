@@ -13,7 +13,7 @@ class indexer : public QThread {
         void run() override;
 
     signals:
-        void newPath(QString path, QString filename, QString extension, qint64 size, QString lastModified);
+        void newPath(QString path, QString filename, QString extension, qint64 size, QString lastModified, QString creationDate);
 };
 
 #endif // INDEXER_H

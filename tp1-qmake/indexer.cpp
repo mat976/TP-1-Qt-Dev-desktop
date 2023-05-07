@@ -27,9 +27,9 @@ void indexer::run(){
             QString extension = match.captured(3);
             qint64 size = fileInfo.size();
             QString lastModified = fileInfo.lastModified().toString();
-            // ajouter la date de création
+            QString creationDate = fileInfo.birthTime().toString();
 
-            emit newPath(path, fileName, extension, size, lastModified);
+            emit newPath(path, fileName, extension, size, lastModified, creationDate);
         }
 
         QThread::usleep(100);
