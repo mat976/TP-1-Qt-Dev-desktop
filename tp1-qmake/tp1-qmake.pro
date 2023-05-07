@@ -14,16 +14,14 @@ SOURCES += \
     lexer.cpp \
     main.cpp \
     mainwindow.cpp \
-    state.cpp \
-    transition.cpp
+    state.cpp
 
 HEADERS += \
     fsm.h \
     indexer.h \
     lexer.h \
     mainwindow.h \
-    state.h \
-    transition.h
+    state.h
 
 FORMS += \
     mainwindow.ui
