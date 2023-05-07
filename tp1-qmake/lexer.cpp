@@ -5,6 +5,7 @@ Lexer::Lexer(){
 }
 
 void Lexer::setQuery(const QString& query){
+    qDebug() << "received query : " << query;
     m_query = query;
 }
 
@@ -70,8 +71,14 @@ bool Lexer::checkSizeToken()
 {
     QRegularExpression regexSize("SIZE:\\s*(\\d+)([KMG]?)");
     QRegularExpressionMatch matchSize = regexSize.match(m_query);
-    qDebug() << __FUNCTION__ << matchSize.hasMatch();
-    return matchSize.hasMatch();
+
+    // Vérifier si le match correspond à "SIZE" et non à "MAX_SIZE"
+    if (matchSize.hasMatch() && !m_query.contains("MAX_SIZE")) {
+        qDebug() << __FUNCTION__ << matchSize.hasMatch();
+        return true;
+    }
+
+    return false;
 }
 
 bool Lexer::checkExtToken()

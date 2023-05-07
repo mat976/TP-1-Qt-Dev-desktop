@@ -16,7 +16,8 @@ class MainWindow : public QMainWindow
     int m_proBar = 0;
     indexer *_indexer = nullptr;
     Fsm _fsm;
-    QString testQuery = "SEARCH 'testme please' LAST_MODIFIED:05/07/2023 CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:1M SIZE:BETWEEN 10M AND 20M EXT:txt,doc,xlsx TYPE:image OR text";
+    //QString testQuery = "SEARCH 'testme please' LAST_MODIFIED:05/07/2023 CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:1M SIZE:BETWEEN 10M AND 20M EXT:txt,doc,xlsx TYPE:image OR text";
+    QString testQuery = "SEARCH 'testme please' LAST_MODIFIED:05/07/2023 CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:20M TYPE:image OR text";
 
 public:
     MainWindow(QWidget *parent = nullptr);

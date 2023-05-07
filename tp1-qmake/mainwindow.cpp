@@ -70,6 +70,7 @@ void MainWindow::newPath(QString path, QString fileName, QString extension, qint
 void MainWindow::on_pushButton_clicked()
 {
     this->_fsm.setQuery(this->testQuery);
+    qDebug() << "test query : " << testQuery;
     this->_fsm.run();
 }
 

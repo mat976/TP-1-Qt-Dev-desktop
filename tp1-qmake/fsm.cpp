@@ -41,6 +41,7 @@ Fsm::Fsm()
 }
 
 void Fsm::setQuery(const QString& query){
+    qDebug() << "new query : " << query;
     this->_lexer.setQuery(query);
 }
 
@@ -60,6 +61,15 @@ bool Fsm::checkState(State& src, const State& target, bool cond, std::function<v
 
 void Fsm::run()
 {
+    _lexer.checkSearchToken();
+    _lexer.checkLastModifiedToken();
+    _lexer.checkCreatedToken();
+    _lexer.checkMaxSizeToken();
+    _lexer.checkMinSizeToken();
+    _lexer.checkSizeToken();
+    _lexer.checkExtToken();
+    _lexer.checkTypeToken();
+
     _currentState = START;
 
     checkState(_currentState, READING_ACTION, _lexer.checkActionToken(), [this](){
