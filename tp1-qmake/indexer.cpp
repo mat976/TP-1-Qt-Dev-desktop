@@ -27,6 +27,7 @@ void indexer::run(){
             QString extension = match.captured(3);
             qint64 size = fileInfo.size();
             QString lastModified = fileInfo.lastModified().toString();
+            // ajouter la date de création
 
             emit newPath(path, fileName, extension, size, lastModified);
         }

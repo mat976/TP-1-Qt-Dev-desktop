@@ -68,46 +68,82 @@ void Fsm::run()
 
     checkState(_currentState, SEARCH, _lexer.checkSearchToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
+        this->SQLQuery += "SELECT path, filename, extension, size FROM files WHERE ";
     });
 
     checkState(_currentState, READING_FILENAME, true, [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
         // do somthing with _lexer.extractFilename();
-        // faire dans le lexer la fonction pour get le filename si la cond passe, et du coup dans le lexer faire aussi la fonction pour la cond
+        this->SQLQuery += "filename='" + _lexer.extractFilename() + "' ";
     });
 
     checkState(_currentState, READING_OPTIONS, _lexer.checkLastModifiedToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
-        // faire dans le lexer la fonction pour get le token "last modified"
+        // do something with _lexer.extractLastModified();
+        QString date = _lexer.extractLastModified().replace('/', '-');
+        QRegularExpression regex("(\\d{2}-\\d{2}-\\d{4})|(\\d{2}-\\d{4})|(\\d{4})");
+        QRegularExpressionMatch match = regex.match(date);
+        if (match.hasMatch()) {
+            if(match.captured(1).isEmpty()){
+                if(match.captured(2).isEmpty()){
+                    this->SQLQuery += "AND lastModified=STR_TO_DATE('" + date + "', '%Y') ";
+                } else {
+                    this->SQLQuery += "AND lastModified=STR_TO_DATE('" + date + "', '%m-%y') ";
+                }
+            } else {
+                this->SQLQuery += "AND lastModified='" + date + "' ";
+            }
+        }
     });
 
     checkState(_currentState, READING_OPTIONS, _lexer.checkCreatedToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
-        // faire dans le lexer la fonction pour get le token created
+        // do something with _lexer.extractCreated();
+        QString date = _lexer.extractCreated().replace('/', '-');
+        QRegularExpression regex("(\\d{2}-\\d{2}-\\d{4})|(\\d{2}-\\d{4})|(\\d{4})");
+        QRegularExpressionMatch match = regex.match(date);
+        if (match.hasMatch()) {
+            if(match.captured(1).isEmpty()){
+                if(match.captured(2).isEmpty()){
+                    this->SQLQuery += "AND creationDate=STR_TO_DATE('" + date + "', '%Y') ";
+                } else {
+                    this->SQLQuery += "AND creationDate=STR_TO_DATE('" + date + "', '%m-%y') ";
+                }
+            } else {
+                this->SQLQuery += "AND creationDate='" + date + "' ";
+            }
+        }
     });
 
     checkState(_currentState, READING_OPTIONS, _lexer.checkMaxSizeToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
-        // faire dans le lexer la fonction pour get le token max size
+        // do something with _lexer.extractMaxSize();
+        this->SQLQuery += "AND size<=" + _lexer.extractMaxSize() + " ";
     });
 
     checkState(_currentState, READING_OPTIONS, _lexer.checkMinSizeToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
-        // faire dans le lexer la fonction pour get le token min size
+        // do something with _lexer.extractMinSize();
+        this->SQLQuery += "AND size>=" + _lexer.extractMaxSize() + " ";
     });
 
     checkState(_currentState, READING_OPTIONS, _lexer.checkSizeToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
-        // faire dans le lexer la fonction pour get le token size
+        // do something with _lexer.extractSize();
+        this->SQLQuery += "AND size=" + _lexer.extractSize() + " ";
     });
 
-    checkState(_currentState, READING_OPTIONS, _lexer.checkExtToken(), [this](){
+    /*TODO
+     * checkState(_currentState, READING_OPTIONS, _lexer.checkExtToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
-        // faire dans le lexer la fonction pour get le token ext
+        // do something with _lexer.extractExtensions();
     });
 
     checkState(_currentState, READING_OPTIONS, _lexer.checkTypeToken(), [this](){
         qDebug() << "Current State is : " << _currentState.getStateName();
         // faire dans le lexer la fonction pour get le token type
     });
+    */
+
+    qDebug() << SQLQuery;
 }

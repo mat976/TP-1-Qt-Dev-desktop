@@ -21,6 +21,8 @@ class Fsm
     State READING_OPTIONS;
     State FINISHED;
 
+    QString SQLQuery = "";
+
     Lexer _lexer;
     bool checkState(State& src, const State& target, bool cond, std::function<void()> callback);
 

@@ -23,6 +23,12 @@ class Lexer
         bool checkTypeToken();
 
         QString extractFilename();
+        QString extractLastModified() const;
+        QString extractCreated() const;
+        QString extractMaxSize();
+        QString extractMinSize();
+        QString extractSize();
+        QStringList extractExtensions();
 };
 
 #endif // LEXER_H
