@@ -9,17 +9,21 @@ State::State(const QString& stateName, const int id)
     qDebug() << _id;
 }
 
-QString State::stateName() const
+QString State::getStateName() const
 {
-    return this->_stateName;
+    return _stateName;
 }
 
-int State::id() const {
-    return this->_id;
+int State::getId() const {
+    return _id;
 }
 
-void State::addTransition(Transition *transition)
+QVector<State*> State::getTransitions() const
 {
-    _transitions.append(transition);
+    return _transitions;
 }
 
+void State::addTransition(State* targetState)
+{
+    _transitions.append(targetState);
+}
