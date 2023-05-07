@@ -4,9 +4,6 @@ State::State(const QString& stateName, const int id)
 {
     this->_stateName = stateName;
     this->_id = id;
-
-    qDebug() << _stateName;
-    qDebug() << _id;
 }
 
 QString State::getStateName() const
@@ -21,6 +18,15 @@ int State::getId() const {
 QVector<State*> State::getTransitions() const
 {
     return _transitions;
+}
+
+bool State::isTransitionPossible(const State& target) const {
+    for (State* transition : _transitions) {
+        if (*transition == target) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void State::addTransition(State* targetState)

@@ -22,7 +22,7 @@ class Fsm
     State FINISHED;
 
     Lexer _lexer;
-    bool checkState(State& src, const State& target, bool cond);
+    bool checkState(State& src, const State& target, bool cond, std::function<void()> callback);
 
     public:
         Fsm();

@@ -12,6 +12,7 @@ class Lexer
     public:
         Lexer();
         void setQuery(const QString& query);
+        bool checkActionToken();
         bool checkSearchToken();
         bool checkLastModifiedToken();
         bool checkCreatedToken();
@@ -20,6 +21,8 @@ class Lexer
         bool checkSizeToken();
         bool checkExtToken();
         bool checkTypeToken();
+
+        QString extractFilename();
 };
 
 #endif // LEXER_H

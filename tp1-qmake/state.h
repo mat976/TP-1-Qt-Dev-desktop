@@ -14,14 +14,14 @@ class State
     public:
         State(const QString& stateName, const int id);
         void addTransition(State* targetState);
-
+        bool isTransitionPossible(const State& target) const;
         QString getStateName() const;
         int getId() const;
         QVector<State*> getTransitions() const;
 
         bool operator == (const State& st1) {
-            qDebug() << __FUNCTION__ << st1.getId() << getId();
-            qDebug() << __FUNCTION__ << st1.getStateName() << getStateName();
+            // qDebug() << __FUNCTION__ << st1.getId() << getId();
+            // qDebug() << __FUNCTION__ << st1.getStateName() << getStateName();
             return st1._id == _id;
         }
 };

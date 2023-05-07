@@ -8,6 +8,17 @@ void Lexer::setQuery(const QString& query){
     m_query = query;
 }
 
+bool Lexer::checkActionToken()
+{
+    QStringList actionTokens = {"INDEXER", "GET", "ADD", "PUSH", "CLEAR", "SEARCH"};
+
+    QString regexPattern = QString("(%1)").arg(actionTokens.join("|"));
+    QRegularExpression regexAction(regexPattern);
+    QRegularExpressionMatch matchAction = regexAction.match(m_query);
+    qDebug() << __FUNCTION__ << matchAction.hasMatch();
+    return matchAction.hasMatch();
+}
+
 bool Lexer::checkSearchToken() {
     QRegularExpression regexSearch("SEARCH\\s+'([^']+)'");
     QRegularExpressionMatch match = regexSearch.match(m_query);
@@ -77,4 +88,18 @@ bool Lexer::checkTypeToken()
     QRegularExpressionMatch matchType = regexType.match(m_query);
     qDebug() << __FUNCTION__ << matchType.hasMatch();
     return matchType.hasMatch();
+}
+
+QString Lexer::extractFilename()
+{
+    QString filename;
+    QRegularExpression regex("SEARCH '\\s*(.*?)\\s*'");
+    QRegularExpressionMatch match = regex.match(m_query);
+
+    if (match.hasMatch()) {
+        filename = match.captured(1);
+    }
+
+    qDebug() << __FUNCTION__ << filename;
+    return filename;
 }
