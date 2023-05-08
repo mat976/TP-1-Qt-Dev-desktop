@@ -12,26 +12,19 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-
     bdd.cpp \
-    fsm.cpp \
     indexer.cpp \
-    lexer.cpp \
     indexingclient.cpp \
     main.cpp \
     mainwindow.cpp \
-    server.cpp \
-    state.cpp
+    server.cpp
 
 HEADERS += \
     bdd.h \
-    fsm.h \
     indexer.h \
-    lexer.h \
     indexingclient.h \
     mainwindow.h \
-    server.h \
-    state.h
+    server.h
 
 FORMS += \
     mainwindow.ui

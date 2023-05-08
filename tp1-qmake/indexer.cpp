@@ -27,7 +27,6 @@ void indexer::run(){
         QRegularExpressionMatch match = re.match(nextPath);
         QFile file(nextPath);
 
-
         if (match.hasMatch()) {
             QString path = match.captured(1);
             QString fileName = match.captured(2);
@@ -38,8 +37,6 @@ void indexer::run(){
                 if (file.open(QIODevice::ReadOnly)) {
                     // Récupère la taille du fichier en octets
                     qint64 size = file.size();
-                    QString lastModified = fileInfo.lastModified().toString();
-                    QString creationDate = fileInfo.birthTime().toString();
 
                     // Ajoute les informations du fichier au buffer
                     QVariantList rowData;
@@ -47,8 +44,6 @@ void indexer::run(){
                     rowData.append(fileName);
                     rowData.append(extension);
                     rowData.append(size);
-                    rowData.append(lastModified);
-                    row.append(creationDate);
                     buffer.append(rowData);
 
                     // Ferme le fichier
@@ -65,7 +60,6 @@ void indexer::run(){
 
             // Vide le buffer
             buffer.clear();
-
         }
 
         QThread::usleep(100);
@@ -77,5 +71,4 @@ void indexer::run(){
         bdd.insertData(buffer);
     }
     qDebug() << "Indexing complete";
-
 }
