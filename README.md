@@ -15,7 +15,7 @@ L'**indexeur** va ensuite récupérer des informations sur le fichiers comme sa 
 ### Sur la branche `fsm` nous avons donc le **lexer** et la **FSM**.
 L'objectif initial de la **FSM** est de construire une requête SQL à ensuite envoyer à la base de données et suivre tout le processus. 
 
-*(le code de la FSM run sans erreurs)*
+> *(le code de la FSM run sans erreurs)*
 
 L' **UI** va dialoguer avec la **FSM** en lui passant la requête (requête utilisant le dialecte). 
 
