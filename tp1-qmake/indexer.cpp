@@ -37,6 +37,8 @@ void indexer::run(){
                 if (file.open(QIODevice::ReadOnly)) {
                     // Récupère la taille du fichier en octets
                     qint64 size = file.size();
+                    QString lastModified = fileInfo.lastModified().toString();
+                    QString creationDate = fileInfo.birthTime().toString();
 
                     // Ajoute les informations du fichier au buffer
                     QVariantList rowData;
@@ -44,6 +46,12 @@ void indexer::run(){
                     rowData.append(fileName);
                     rowData.append(extension);
                     rowData.append(size);
+                    
+                    /* ajouter ces lignes
+                     * rowData.append(lastModified);
+                     * rowData.append(creationDate);
+                    */  
+                   
                     buffer.append(rowData);
 
                     // Ferme le fichier
