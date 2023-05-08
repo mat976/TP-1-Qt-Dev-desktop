@@ -34,5 +34,8 @@ SEARCH 'testme please' CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:20M TYPE:image OR t
 ----
 ### Documents supplémentaires
 
+Le schéma assez simple reprennant les éléments du projet
+![schéma projet](schemas/schéma.png)
+
 Le schéma de la FSM
 ![schéma fsm](schemas/fsm.png)
