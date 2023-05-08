@@ -25,6 +25,7 @@ Et grâce à la callback de chaque `checkState()` on va monter notre requête **
 Toutes les étapes de la FSM ne sont pas faite, mais le SEARCH fonctionne. Il y manque quelques précisions d'options comme les "BETWEEN".
 
 > le code de la FSM devrait run sans erreurs.
+> 
 Exemple de requête à tester:
 ```
 SEARCH 'testme please' CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:20M TYPE:image OR text LAST_MODIFIED:05/07/2023
