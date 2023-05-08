@@ -35,7 +35,7 @@ private slots:
     void jobFinished();
     void newPath(QString path, QString fileName, QString extension, qint64 size, QString lastModified);
 
-    void on_pushButton_clicked();
+    void on_btnSendRequest_clicked();
 
 private:
     Ui::MainWindow *ui;

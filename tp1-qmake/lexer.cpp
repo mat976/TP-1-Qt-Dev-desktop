@@ -118,6 +118,9 @@ QString Lexer::extractLastModified() const {
         QString dateSpec = match.captured(1);
         return dateSpec; // retourner la date spécifiée
     } else {
+
+        // TODO : gérer le cas du BETWEEN
+
         return QString(); // retourner une chaîne vide si aucune correspondance n'est trouvée
     }
 }
@@ -151,6 +154,8 @@ QString Lexer::extractMaxSize()
         } else if (sizeUnit == "G") {
             sizeInBytes *= 1024 * 1024 * 1024; // Conversion en octets
         }
+
+        // TODO : gérer le cas du BETWEEN
 
         return QString::number(sizeInBytes, 'f', 0);
     }

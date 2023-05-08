@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.1, 2023-05-07T13:42:57. -->
+<!-- Written by QtCreator 9.0.1, 2023-05-08T16:13:39. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -236,9 +236,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">tp1-qmake2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Ynov/dev-desktop/test2/TP-1-Qt-Dev-desktop/tp1-qmake/tp1-qmake.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Ynov/dev-desktop/test2/TP-1-Qt-Dev-desktop/tp1-qmake/tp1-qmake.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Ynov/dev-desktop/tp1/TP-1-Qt-Dev-desktop/tp1-qmake/tp1-qmake.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Ynov/dev-desktop/tp1/TP-1-Qt-Dev-desktop/tp1-qmake/tp1-qmake.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

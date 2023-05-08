@@ -66,11 +66,11 @@ void MainWindow::newPath(QString path, QString fileName, QString extension, qint
     qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size << lastModified;
 }
 
-
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_btnSendRequest_clicked()
 {
-    this->_fsm.setQuery(this->testQuery);
-    qDebug() << "test query : " << testQuery;
+    QString request = ui->txtSearch->toPlainText();
+    qDebug() << "request :" << request;
+    this->_fsm.setQuery(request);
     this->_fsm.run();
 }
 
