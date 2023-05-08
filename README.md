@@ -30,4 +30,9 @@ Exemple de requête à tester:
 ```
 SEARCH 'testme please' CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:20M TYPE:image OR text LAST_MODIFIED:05/07/2023
 ```
+
+----
+### Documents supplémentaires
+
+Le schéma de la FSM
 ![schéma fsm](schemas/fsm.png)
