@@ -3,10 +3,12 @@
 #include "bdd.h"
 #include <QStandardItemModel>
 #include <QDebug>
+#include <indexer.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , _indexer(new indexer)
+     , _fsm()
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -56,7 +58,6 @@ void MainWindow::on_btnSearch_clicked()
     _bdd.close();
 }
 
-
 void MainWindow::jobStarted()
 {
     qDebug() << __FUNCTION__ << __LINE__;
@@ -67,8 +68,17 @@ void MainWindow::jobFinished()
     qDebug() << __FUNCTION__ << __LINE__;
 }
 
-void MainWindow::newPath(QString path, QString fileName, QString extension, qint64 size)
+
+void MainWindow::newPath(QString path, QString fileName, QString extension, qint64 size, QString lastModified, QString creationDate)
 {
-    qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size;
+    qDebug() << __FUNCTION__ << __LINE__ << path << fileName << extension << "size:" << size << "last modified: " << lastModified << "creation date: " << creationDate;
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->_fsm.setQuery(this->testQuery);
+    qDebug() << "test query : " << testQuery;
+    this->_fsm.run();
 }
 
