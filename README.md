@@ -37,5 +37,5 @@ SEARCH 'testme please' CREATED:12/2020 MAX_SIZE:10M MIN_SIZE:20M TYPE:image OR t
 Le schéma assez simple reprennant les éléments du projet
 ![schéma projet](schemas/schéma.png)
 
-Le schéma de la FSM
+Le diagramme état transition
 ![schéma fsm](schemas/fsm.png)
