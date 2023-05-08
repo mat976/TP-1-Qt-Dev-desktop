@@ -3,7 +3,7 @@
 Certainement par soucis de manque d'organisation, nous n'avons pas pu sortir un projet fonctionnel à 100%. Voici donc l'état actuel du projet.
 
 ----
-### Sur la branche `bdd` nous avons [...] et l'indexer.
+### Sur la branche `bdd` nous avons la base de données et l'indexer.
 
 Au niveau de la BDD j'ai utiliser QtSql et j'ai fait plusieurs fonctions :
 
